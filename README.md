@@ -32,7 +32,7 @@ MVC - Model-View-Controller:
 an architectural pattern used in software engineering to organize code into three main components:
 1.	Model - represents data and business logic of the application.
 2.	View – represents the presentation layer, or what the user sees.
-3.	Controller – controls the flow of data between the model and view and responds to user action.  
+3.	Controller – controls thesuch as manually applying database schema changes using scripts, flow of data between the model and view and responds to user action.  
 
 By separating these three components, applications become more modular, easier to test and maintain.  
 Additionally, changes to one part of the application do not affect the others, making it easier to develop and modify code.
@@ -63,34 +63,66 @@ Hibernate:
  * Provides lazy loading, caching, and transaction management - useful with large datasets and complex DB relationships.  
 ---
 ## Step #2:  
-- Create DB in docker container:  
-  a) Start Docker: sudo systemctl start docker    
-  b) Create Container: sudo docker run --name employee-api-mysql -e MYSQL_ROOT_PASSWORD=*** -d -p 3306:3306 mysql  
-  c) Start created container: sudo docker start 6b2210afe132b9d72d2fa8e1b7a1d9f81ac7448973798d4edbe5311ebc74d768  
+Create DB in docker container:  
+
+  a) Start Docker:   
+```
+sudo systemctl start docker  
+```
+
+  b) Create Container:  
+```
+sudo docker run --name employee-api-mysql -e MYSQL_ROOT_PASSWORD=*** -d -p 3306:3306 mysql  
+```
+
+  c) Start created container:  
+```
+sudo docker start 6b2210afe132b9d72d2fa8e1b7a1d9f81ac7448973798d4edbe5311ebc74d768  
+```
+
 Connect to DB and create table named employee - create column id.  
 
-- Create connection to DB:    
-  a) Inject dependency to pom.xml - to create .env file (more secure storing connection config.): spring-dotenv.  
+Create connection to DB:  
+
+  a) Inject dependency to pom.xml - to create .env file (more secure storing connection config.):  
+```
+<dependency>
+	<groupId>me.paulschwarz</groupId>
+	<artifactId>spring-dotenv</artifactId>
+	<version>2.5.4</version>
+</dependency>
+```
+
   b) Create .env file and initialize variables - and make .env.example - for reference purpose:    
+```
 DB_USERNAME="root"  
 DB_PASSWORD="***"  
 DB_URL="jdbc:mysql://localhost"  
 DB_PORT="3306"  
+```
+
   c) Add line in .gitignore file to skip .env file.  
+  
   d) Establish connection in application.properties file:  
+```
 spring.datasource.url=${env.DB_URL}:${env.DB_PORT}/employee?useSSL=false  
 spring.datasource.username=${env.DB_USERNAME}  
 spring.datasource.password=${env.DB_PASSWORD}  
+```
 
 And make Hibernate configuration:  
+```
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect  
 spring.jpa.hibernate.ddl-auto=update  
+```
 
 ---
 
-Hibernate dialect is a configuration setting that enables Hibernate to interact with different databases and handle the database-specific syntax and behavior differences in a standardized way.  
+Hibernate dialect:  
+Configuration setting that enables Hibernate to interact with different databases and handle the database-specific syntax and behavior differences in a standardized way.  
 
-spring.jpa.hibernate.ddl-auto=update is a configuration property to automatically create or update database tables based on the entity classes defined in the application.  
+spring.jpa.hibernate.ddl-auto=update:   
+Configuration property to automatically create or update database tables based on the entity classes defined in the application.  
 ddl-auto=update is a convenient way to automatically create or update database tables during development phase. It is recommended to use a more controlled approach in production environments.  
 
 
