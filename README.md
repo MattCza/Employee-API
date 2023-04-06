@@ -4,7 +4,7 @@ This project is my first of many using Java + Maven + MySQL (Docker Container) +
 The purpose of this API is to provide RESTful API for managing (CRUD operations) employees. 
 
 Application is build using 3-Layer Architecture:
-1. DAO (Repository) - Persistance Layer - provides comminication with Data Base.
+1. DAO (Repository) - Persistence Layer - provides communication with Data Base.
 2. Service - Business Logic - implementation of the methods.
 3. Controller - API - provides responses for HTTP requests.
 
@@ -18,7 +18,7 @@ Since this project won't have a frontend, all functionalities will be tested in 
 - Generate project with Spring Initializr - Dependencies:  
   a) Lombok - Reduce boilerplate code.  
   b) Spring Web - Build RESTful app.  
-  c) Spring Data JPA - conectivity with DB + Hibernate.  
+  c) Spring Data JPA - connectivity with DB + Hibernate.  
   d) MySQL Driver.
 ---
 REST API:   
@@ -48,13 +48,13 @@ Java Persistence API (JPA):
 ---
 Java Database Connectivity (JDBC):
  * Java API that allows applications to interact with relational DB - such as MySQL, PostgreSQL, Oracle, Microsoft SQL Server.  
- * Provides a set of interfaces and classes to execute SQL statements, retrive and manipulate data, and manage DB connections.  
+ * Provides a set of interfaces and classes to execute SQL statements, retrieve and manipulate data, and manage DB connections.  
  * Provides standardized way for Java apps to interact with DB, making it possible to write DB-independent code.  
  * Allows to write efficient and secure code - you can use prepared statements to avoid SQL injection attacks.  
 ---
 Spring Data:
- * Part of the Spring Framework, that provides an easire and more consistent approach to work with data access technologies.  
- * Offers abstractions and APIs that simplify data access code and reduce boilerpate.  
+ * Part of the Spring Framework, that provides an easier and more consistent approach to work with data access technologies.  
+ * Offers abstractions and APIs that simplify data access code and reduce boilerplate.  
 ---
 Hibernate:
  * Java-based ORM framework, that simplifies the process of mapping objects to relational DB tables.  
@@ -62,3 +62,36 @@ Hibernate:
  * Uses Java annotations or XML mapping - to define the relationship between object and tables.  
  * Provides lazy loading, caching, and transaction management - useful with large datasets and complex DB relationships.  
 ---
+## Step #2:  
+- Create DB in docker container:  
+  a) Start Docker: sudo systemctl start docker    
+  b) Create Container: sudo docker run --name employee-api-mysql -e MYSQL_ROOT_PASSWORD=*** -d -p 3306:3306 mysql  
+  c) Start created container: sudo docker start 6b2210afe132b9d72d2fa8e1b7a1d9f81ac7448973798d4edbe5311ebc74d768  
+Connect to DB and create table named employee - create column id.  
+
+- Create connection to DB:    
+  a) Inject dependency to pom.xml - to create .env file (more secure storing connection config.): spring-dotenv.  
+  b) Create .env file and initialize variables - and make .env.example - for reference purpose:    
+DB_USERNAME="root"  
+DB_PASSWORD="***"  
+DB_URL="jdbc:mysql://localhost"  
+DB_PORT="3306"  
+  c) Add line in .gitignore file to skip .env file.  
+  d) Establish connection in application.properties file:  
+spring.datasource.url=${env.DB_URL}:${env.DB_PORT}/employee?useSSL=false  
+spring.datasource.username=${env.DB_USERNAME}  
+spring.datasource.password=${env.DB_PASSWORD}  
+
+And make Hibernate configuration:  
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect  
+spring.jpa.hibernate.ddl-auto=update  
+
+---
+
+Hibernate dialect is a configuration setting that enables Hibernate to interact with different databases and handle the database-specific syntax and behavior differences in a standardized way.  
+
+spring.jpa.hibernate.ddl-auto=update is a configuration property to automatically create or update database tables based on the entity classes defined in the application.  
+ddl-auto=update is a convenient way to automatically create or update database tables during development phase. It is recommended to use a more controlled approach in production environments.  
+
+
+
