@@ -82,6 +82,8 @@ sudo docker start 6b2210afe132b9d72d2fa8e1b7a1d9f81ac7448973798d4edbe5311ebc74d7
 
 Connect to DB and create table named employee - create column id.  
 
+---
+
 Create connection to DB:  
 
   a) Inject dependency to pom.xml - to create .env file (more secure storing connection config.):  
