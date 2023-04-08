@@ -133,12 +133,10 @@ ddl-auto=update is a convenient way to automatically create or update database t
 java.sql.SQLNonTransientConnectionException: Public Key Retrieval is not allowed   
 ```
 
-This error occurs when the columns in MySQL are not the same as the class fields in the application.
-
 Adding client option in mysql-connector resolved the problem:  
 allowPublicKeyRetrieval=true  
 
 Be careful! This options allows attacker for a MITM attack. Use this in testing environment only.  
-
+After first connection you can remove this option.  
 
 
