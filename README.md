@@ -128,13 +128,15 @@ Configuration property to automatically create or update database tables based o
 ddl-auto=update is a convenient way to automatically create or update database tables during development phase. It is recommended to use a more controlled approach in production environments.  
 
 ---
-Error occurred:  
+### Error occurred:  
+```
 java.sql.SQLNonTransientConnectionException: Public Key Retrieval is not allowed   
+```
 
 Adding client option in mysql-connector resolved the problem:  
 allowPublicKeyRetrieval=true  
 
-Be careful! This options allows attacker for a MITM attack.  
+Be careful! This options allows attacker for a MITM attack. Use this in testing environment only.  
 
 
 
