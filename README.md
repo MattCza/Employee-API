@@ -63,7 +63,7 @@ Hibernate:
  * Provides lazy loading, caching, and transaction management - useful with large datasets and complex DB relationships.  
 ---
 ## Step #2:  
-Create DB in docker container:  
+Create DB in docker container and establish connection:  
 
   a) Start Docker:   
 ```
@@ -138,5 +138,24 @@ allowPublicKeyRetrieval=true
 
 Be careful! This options allows attacker for a MITM attack. Use this in testing environment only.  
 After first connection you can remove this option.  
+
+---  
+## Step 3:  
+Create representation of an entity to class.  
+
+Use annotations:  
+@Data - Lombock annotation - creates Getters, Setters, Constructors, toString, equals, hashCode.  
+@Entity - JPA annotation - specifies that the class is an entity.  
+@Table(name = "") - annotation specifies the table in the database with which this entity is mapped.  
+@Id – specifies the primary key of the entity.  
+@GeneratedValue – specifies the generation strategies for the values of primary keys.  
+@Column – specifies the column name from DB.  
+
+In MySQL naming convention is to divide the words by underscore, and to name columns in singular form, more info at:  
+https://stackoverflow.com/questions/338156/table-naming-dilemma-singular-vs-plural-names  
+
+
+
+
 
 
