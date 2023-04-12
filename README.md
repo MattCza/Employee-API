@@ -185,7 +185,7 @@ Annotation used to specify that a method or a class should be executed within a 
 ## Step 5:  
 Create Service interface and its implementation.  
 
-For naming convention I will use "IEmployeeService" name.  
+For naming convention I will use "IEmployeeService" name. Interface will help to keep track of the methods in service layer of Application.  
 ```
 public interface IEmployeeService {
     Employee saveEmployee(Employee employee);
@@ -193,6 +193,27 @@ public interface IEmployeeService {
 }
 ```
 
+For now those 2 methods will do the work just fine.  
+Now, implement them in EmployeeService class.  
+
+```
+@Service
+public class EmployeeService implements IEmployeeService {
+    private IEmployeeRepository employeeRepository;
+    //@Autowired
+    public EmployeeService(IEmployeeRepository employeeRepository){
+        this.employeeRepository = employeeRepository;
+    }
+    @Override
+    public Employee saveEmployee(Employee employee) {
+        return employeeRepository.save(employee);
+    }
+    @Override
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.findAll();
+    }
+}
+```
 
 
 
