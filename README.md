@@ -226,7 +226,47 @@ Annotation for marking a class as a service class. A service class is a type of 
 Annotation that is used to automatically inject dependencies into a class. When you annotate a field, constructor, or method with @Autowired, Spring will automatically identify the dependencies of the class and inject them at runtime.  
 Spring with version 4.3, if a class, which is configured as a Spring bean, has only one constructor, the @Autowired annotation can be omitted and Spring will use that constructor and inject all necessary dependencies.  
 
-Bean:
+Bean:  
 The objects that form the backbone of application and that are managed by the Spring IoC container are called beans. A bean is an object that is instantiated, assembled, and otherwise managed by a Spring IoC container.  
 Spring IoC container is the program that injects dependencies into an object and make it ready for our use.
 
+---
+## Step 6:  
+Create Controller class - to provide mapping of end user HTTP requests to DB CRUD operations.    
+
+
+```
+@RestController
+@RequestMapping("/api/employees")
+public class EmployeeController {
+    private EmployeeService employeeService;
+    @Autowired
+    public EmployeeController(EmployeeService employeeService){
+        this.employeeService = employeeService;
+    }
+    @GetMapping()
+    public ResponseEntity<List<Employee>> getAllEmployees(){
+        return new ResponseEntity<List<Employee>>(employeeService.getAllEmployees(), HttpStatus.OK);
+    }
+    @PostMapping()
+    public ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee){
+        return new ResponseEntity<Employee>(employeeService.saveEmployee(employee), HttpStatus.CREATED);
+    }
+}
+```
+
+@RestController:  
+Convenient annotation that combines @Controller and @ResponseBody, which eliminates the need to annotate every request handling method of the Controller class with the @ResponseBody annotation.  
+@RestController is a special annotation that is used to mark a class as a controller for processing RESTful web requests. It indicates that the methods in that class are responsible for handling incoming HTTP requests and returning the appropriate HTTP responses. When a request is made to the URL mapped to a @RestController method, the method is invoked and its return value is converted into an HTTP response, typically in JSON format.  
+
+@RequestMapping:  
+When you add the @RequestMapping annotation to a method, it specifies the URL path that should be used to invoke that method when a matching HTTP request is received. You can also specify other attributes of the HTTP request, such as the HTTP method, request headers, and query parameters, using additional parameters of the @RequestMapping annotation.  
+
+@PostMapping:  
+When you add the @PostMapping annotation to a method, it specifies that the method should handle HTTP POST requests to a specific URL path. The @PostMapping annotation is a specialized version of the more general @RequestMapping annotation, which can be used to map any type of HTTP request to a method.  
+
+ResponseEntity:  
+You can use ResponseEntity as the return type of a controller method to customize the HTTP response that is returned to the client. By using ResponseEntity, you can set the HTTP status code, headers, and body of the response based on the result of your controller method.  
+
+@RequestBody:  
+Annotation that is used to bind the HTTP request body to an object in a controller method. When you add the @RequestBody annotation to a method parameter, Spring will automatically map the request body to the specified parameter type. This is particularly useful when processing JSON or XML payloads in HTTP requests, as it allows you to easily convert the payload into a Java object.  
