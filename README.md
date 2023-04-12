@@ -181,7 +181,17 @@ It provides an abstraction of the data layer, and it is a way of centralising th
 Annotation used to specify that a method or a class should be executed within a transaction. In other words, it is a way to ensure that a set of database operations are either committed together as a single unit of work, or rolled back if an error occurs during any part of the transaction.  
 
 
+---
+## Step 5:  
+Create Service interface and its implementation.  
 
+For naming convention I will use "IEmployeeService" name.  
+```
+public interface IEmployeeService {
+    Employee saveEmployee(Employee employee);
+    List<Employee> getAllEmployees();
+}
+```
 
 
 
