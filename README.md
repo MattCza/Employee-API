@@ -27,6 +27,7 @@ REST API:
  * Operates on standard HTTP protocols (GET, POST, PUT, DELETE -> CRUD operations).   
  * Defines an interface that is independent of programming language, platform or device - it can be used with any system that supports HTTP protocol.   
  * The REST API allows for separation of user interface from server implementation and provides ease of integration with other applications.  
+ * Uses stateless communication between the client and the server. This means that each request from the client to the server contains all the information necessary for the server to understand the request, and that the server does not maintain any information about the client's state between requests.  
 ---  
 MVC - Model-View-Controller:
 an architectural pattern used in software engineering to organize code into three main components:
