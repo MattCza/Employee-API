@@ -194,7 +194,7 @@ public interface IEmployeeService {
 ```
 
 For now those 2 methods will do the work just fine.  
-Now, implement them in EmployeeService class.  
+Now, implement them in EmployeeService class and inject dependency from Repository.  
 
 ```
 @Service
@@ -215,6 +215,18 @@ public class EmployeeService implements IEmployeeService {
 }
 ```
 
+2 main methods of dependency injection:  
+– Setter-based dependency injection -> used when you have optional parameters.  
+– Constructor-based dependency injection -> used when you have mandatory parameters.  
 
+@Service:  
+Annotation for marking a class as a service class. A service class is a type of Spring-managed component that contains business logic or other functionality that can be used by other parts of the application. By annotating a class with @Service, Spring will automatically detect and create an instance of the service class, and it will be available for dependency injection throughout the application. This allows other components, such as controllers, to use the functionality provided by the service class without having to manually instantiate it or manage its life-cycle. @Service is typically used in conjunction with other Spring annotations, such as @Autowired, to inject dependencies into the service class.  
 
+@Autowired:  
+Annotation that is used to automatically inject dependencies into a class. When you annotate a field, constructor, or method with @Autowired, Spring will automatically identify the dependencies of the class and inject them at runtime.  
+Spring with version 4.3, if a class, which is configured as a Spring bean, has only one constructor, the @Autowired annotation can be omitted and Spring will use that constructor and inject all necessary dependencies.  
+
+Bean:
+The objects that form the backbone of application and that are managed by the Spring IoC container are called beans. A bean is an object that is instantiated, assembled, and otherwise managed by a Spring IoC container.  
+Spring IoC container is the program that injects dependencies into an object and make it ready for our use.
 
