@@ -162,17 +162,22 @@ Create Repository that extends JPA Repository interface.
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {}  
 ```
 
-JpaRepository - is an interface provided by the Spring Data JPA library. It extends the CrudRepository interface and provides additional methods for querying data from a database.  
-The JpaRepository interface defines methods for basic CRUD operations, such as save(), delete(), and findById(), as well as more advanced querying methods using JPA's query language or native SQL. It also supports pagination and sorting of data. To use it, create interface that extends JpaRepository, and specify the entity type and primary key type, and Spring Data JPA will generate the implementation at runtime.  
+JpaRepository:  
+Interface provided by the Spring Data JPA library. It extends the CrudRepository interface and provides additional methods for querying data from a database.  
+The JpaRepository interface defines methods for basic CRUD operations, such as save(), delete(), and findById(), as well as more advanced querying methods using JPA's query language or native SQL. It also supports pagination and sorting of data.  
+To use it, create interface that extends JpaRepository, and specify the entity type and primary key type, and Spring Data JPA will generate the implementation at runtime.  
 
-Spring Data JPA internally provides @Repository annotation so we don’t need to provide this annotation to EmployeeRepository interface. By default Spring Data JPA made JpaRepository methods transactional So we don’t need to add @Transactional annotation in Service class.  
+Spring Data JPA:  
+Internally provides @Repository annotation so we don’t need to provide this annotation to EmployeeRepository interface. By default Spring Data JPA made JpaRepository methods transactional So we don’t need to add @Transactional annotation in Service class.  
 
-@Repository - indicates that a class is a repository, which is a data access object that provides CRUD operations for a specific entity type. When a class is annotated with @Repository, Spring's component-scanning mechanism will detect it and automatically create a bean instance of the repository class. This bean can then be injected into other Spring-managed beans using the @Autowired annotation or by defining it as a dependency in a Spring configuration file. The purpose of using @Repository is to provide a standardized way to define and use repositories in a Spring-based application.  
+@Repository:  
+Indicates that a class is a repository, which is a data access object that provides CRUD operations for a specific entity type. When a class is annotated with @Repository, Spring's component-scanning mechanism will detect it and automatically create a bean instance of the repository class. This bean can then be injected into other Spring-managed beans using the @Autowired annotation or by defining it as a dependency in a Spring configuration file. The purpose of using @Repository is to provide a standardized way to define and use repositories in a Spring-based application.  
 
 The repository pattern is a popular design pattern for managing persistence in a software application.  
 It provides an abstraction of the data layer, and it is a way of centralising the handling of the domain objects.  
 
-@Transactional is an annotation in Java that is used to specify that a method or a class should be executed within a transaction. In other words, it is a way to ensure that a set of database operations are either committed together as a single unit of work, or rolled back if an error occurs during any part of the transaction.  
+@Transactional:  
+Annotation used to specify that a method or a class should be executed within a transaction. In other words, it is a way to ensure that a set of database operations are either committed together as a single unit of work, or rolled back if an error occurs during any part of the transaction.  
 
 
 
