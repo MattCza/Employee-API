@@ -30,6 +30,14 @@ public class EmployeeController {
         return new ResponseEntity<Employee>(employeeService.saveEmployee(employee), HttpStatus.CREATED);
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") Long employeeId) {
+        return new ResponseEntity<Employee>(employeeService.getEmployeeById(employeeId), HttpStatus.OK);
+    }
 
+    @PostMapping("{id}")
+    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee, @PathVariable("id") Long employeeId){
+        return new ResponseEntity<Employee>(employeeService.updateEmployee(employee, employeeId), HttpStatus.CREATED);
+    }
 
 }
