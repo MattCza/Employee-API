@@ -326,7 +326,7 @@ Controller:
 
 ---
 ## Step 9:  
-Create Update Employee by ID.  
+Update Employee by ID. It can be done better - what if there are null values? Not Post but Update :)  
 
 Service:  
 ```
@@ -351,7 +351,7 @@ Controller:
   
 ---
 ## Step 10:  
-Create Delete Employee by ID.  
+Delete Employee by ID.  
 
 Service:  
 ```
