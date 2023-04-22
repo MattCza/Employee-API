@@ -310,6 +310,10 @@ public Employee getEmployeeById(Long id) {
         );
     }
 ```
+Optional, orElseThrow()  
+In Java 8 and later, Optional is a container object that  may or may not contain a value. It is used to avoid null pointer  exceptions when working with objects that may be null. The orElseThrow() method is a method of the Optional class that allows you to throw an exception if the Optional object is empty.  
+The orElseThrow() method takes a Supplier argument that provides the exception to be thrown. The Supplier takes no arguments and returns an exception object. This allows you to create the exception object only if it is needed, which can be more efficient than creating the exception object before calling the orElseThrow() method.  
+
 
 Controller:  
 ```
