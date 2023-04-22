@@ -270,3 +270,27 @@ You can use ResponseEntity as the return type of a controller method to customiz
 
 @RequestBody:  
 Annotation that is used to bind the HTTP request body to an object in a controller method. When you add the @RequestBody annotation to a method parameter, Spring will automatically map the request body to the specified parameter type. This is particularly useful when processing JSON or XML payloads in HTTP requests, as it allows you to easily convert the payload into a Java object.  
+
+---
+## Step 7:  
+Create a ResourceNotFoundException class to handle events where the user tries to get an object that does not exist.  
+
+```
+@ResponseStatus(value = HttpStatus.NOT_FOUND)
+public class ResourceNotFoundException extends RuntimeException{
+    @Serial
+    private static final long serialVersionUID = 1L;
+    private String resourceName;
+    private String fieldName;
+    private Object fieldValue;
+    public ResourceNotFoundException(String resourceName, String fieldName, Object fieldValue) {
+        super(String.format("%s not found with %s : %s", resourceName, fieldName, fieldValue));
+        this.resourceName = resourceName;
+        this.fieldName = fieldName;
+        this.fieldValue = fieldValue;
+    }
+    public Object getFieldValue() {return fieldValue;}
+    public String getResourceName() {return resourceName;}
+    public String getFieldName() {return fieldName;}
+}
+```
