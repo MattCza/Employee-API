@@ -294,3 +294,74 @@ public class ResourceNotFoundException extends RuntimeException{
     public String getFieldName() {return fieldName;}
 }
 ```
+
+@ResponseStatus
+Annotation that can be used to specify the HTTP status code to be returned by a controller method in case of an exception. By default, when an exception is thrown from a controller method, Spring MVC returns a 500 Internal Server Error status code. However, in some cases, you may want to return a different HTTP status code to the client based on the nature of the exception. As in the example above (value = HttpStatus.NOT_FOUND).  
+
+---
+## Step 8:  
+Create Get Employee by ID.  
+
+Service:  
+```
+public Employee getEmployeeById(Long id) {
+        return employeeRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Employee", "ID", id)
+        );
+    }
+```
+
+Controller:  
+```
+@GetMapping("{id}")
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") Long employeeId) {
+        return new ResponseEntity<Employee>(employeeService.getEmployeeById(employeeId), HttpStatus.OK);
+    }
+```
+
+
+---
+## Step 9:  
+Create Update Employee by ID.  
+
+Service:  
+```
+public Employee updateEmployee(Employee employee, long id) {
+        Employee currentEmployee = getEmployeeById(id);
+        currentEmployee.setFirstName(employee.getFirstName());
+        currentEmployee.setLastName(employee.getLastName());
+        currentEmployee.setEmail(employee.getEmail());
+        currentEmployee.setPhoneNumber(employee.getPhoneNumber());
+        saveEmployee(currentEmployee);
+        return currentEmployee;
+    }
+```
+
+Controller:  
+```
+@PostMapping("{id}")
+    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee, @PathVariable("id") Long employeeId){
+        return new ResponseEntity<Employee>(employeeService.updateEmployee(employee, employeeId), HttpStatus.CREATED);
+    }
+```
+  
+---
+## Step 10:  
+Create Delete Employee by ID.  
+
+Service:  
+```
+public void deleteEmployee(long id) {
+        getEmployeeById(id);
+        employeeRepository.deleteById(id);
+    }
+```
+  
+Controller:  
+```
+@DeleteMapping("{id}")
+    public ResponseEntity<String> deleteEmployee(@PathVariable("id") Long employeeId){
+        employeeService.deleteEmployee(employeeId);
+        return new ResponseEntity<String>("Employee deleted successfully", HttpStatus.OK);
+    }
+```
