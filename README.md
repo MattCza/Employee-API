@@ -1,5 +1,6 @@
 # Employee-API
-This project is my first of many using Java + Maven + MySQL (Docker Container) + Spring Web + Hibernate.
+This project is my first of many using Java + Maven + MySQL (Docker Container) + Spring Web + Hibernate.  
+Backend in Docker container.  
 
 The purpose of this API is to provide RESTful API for managing (CRUD operations) employees. 
 
@@ -369,3 +370,21 @@ Controller:
         return new ResponseEntity<String>("Employee deleted successfully", HttpStatus.OK);
     }
 ```
+
+---
+## Step 10:  
+Docker container Backend.  
+
+- Build application:  
+```
+./mvnw package
+```
+An error with Java version mismatch popped up - so I changed the pom.xml file to Java 17.  
+
+Run the app:  
+```
+java -jar ./target/Employee-API-0.0.1-SNAPSHOT.jar
+```
+
+
+
