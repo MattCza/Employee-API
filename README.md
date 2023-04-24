@@ -385,6 +385,7 @@ Run the app:
 ```
 java -jar ./target/Employee-API-0.0.1-SNAPSHOT.jar
 ```
-
+Rest of the configuration:  
+https://docs.docker.com/language/java/build-images/
 
 
