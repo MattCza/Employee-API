@@ -5,7 +5,7 @@ Backend in Docker container.
 The purpose of this API is to provide RESTful API for managing (CRUD operations) employees. 
 
 Application is build using 3-Layer Architecture:
-1. DAO (Repository) - Persistence Layer - provides communication with Data Base.
+1. Repository - Persistence Layer - provides communication with Data Base.
 2. Service - Business Logic - implementation of the methods.
 3. Controller - API - provides responses for HTTP requests.
 
